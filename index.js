@@ -24,6 +24,7 @@ app.use(morgan((tokens, req, res) => {
 }))
 
 app.use(cors())
+app.use(express.static('build'))
 
 // tehtävä 3.1, loput package.jsonissa
 let persons = [
@@ -49,16 +50,16 @@ let persons = [
     }
   ]
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
+app.get('/api', (req, res) => {
+    res.send('<h1>Hello API!</h1>')
 })
 
-app.get('/persons', (req, res) => {
+app.get('/api/persons', (req, res) => {
     res.json(persons)
 })
 
 // tehtävä 3.2
-app.get('/info', (req, res) => {
+app.get('/api/info', (req, res) => {
     const date = new Date()
     res.send(
         `<div>
@@ -69,7 +70,7 @@ app.get('/info', (req, res) => {
 })
 
 // tehtävä 3.3
-app.get('/persons/:id', (req, res) => {
+app.get('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id)
     const person = persons.find(person => person.id === id)
     if (person){
@@ -80,7 +81,7 @@ app.get('/persons/:id', (req, res) => {
 })
 
 // tehtävä 3.4
-app.delete('/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id);
     persons = persons.filter(person => person.id !== id);
   
