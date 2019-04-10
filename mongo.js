@@ -41,7 +41,7 @@ if (process.argv.length === 3) {
         .then(result => {
             result.forEach(person => {
                 console.log(`${person.name} ${person.number}`)
+            })
+            mongoose.connection.close()
         })
-        mongoose.connection.close()
-    })
 }
